@@ -9,9 +9,9 @@ const OWNER_NAME = "ZEXX_OWNER";
 // 🔑 Multiple Keys Database
 const KEYS_DB = {
   "ZEXX@_VIP": { expiry: "2026-12-31", status: "Premium" },
-  "OWNER_TEST": { expiry: "2035-12-30", status: "Trial" },
-  "ZEXX_@TRY": { expiry: "2026-04-15", status: "Basic" },
-  "ZEXX_P@ID": { expiry: "2026-07-01", status: "Premium" }
+  "OWNER_TEST": { expiry: "2035-1230", status: "Trial" },
+  "ZEXX_TRY": { expiry: "2026-04-15", status: "Basic" },
+  "ZEXX_@PY": { expiry: "2026-07-01", status: "Premium" }
 };
 
 // Middleware for parsing JSON requests
@@ -42,14 +42,14 @@ app.get('/search', async (req, res) => {
 
   // 3️⃣ Phone Check
   if (!phone) {
-    return res.status(400).json({ success: false, message: 'PakPhone number parameter required', owner: OWNER_NAME });
+    return res.status(400).json({ success: false, message: 'Phone number parameter required', owner: OWNER_NAME });
   }
 
   try {
     // 🔥 External API Call (Phone Number Info API)
     const response = await axios.get('https://fam-official.serv00.net/api/database.php', {
       params: {
-        number: Pakphone
+        number: phone
       },
       timeout: 10000 // Timeout set to 10 seconds
     });
@@ -86,3 +86,4 @@ app.get('/', (req, res) => {
 
 // Serverless entry-point for Vercel
 module.exports = app;
+          
